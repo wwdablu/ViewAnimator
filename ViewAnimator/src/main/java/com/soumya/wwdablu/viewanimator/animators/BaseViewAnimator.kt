@@ -1,8 +1,6 @@
 package com.soumya.wwdablu.viewanimator.animators
 
-import android.animation.TimeInterpolator
 import android.view.View
-import android.view.animation.AccelerateDecelerateInterpolator
 import com.soumya.wwdablu.viewanimator.ViewAnimator
 import com.soumya.wwdablu.viewanimator.animations.Move
 import com.soumya.wwdablu.viewanimator.animations.Property
@@ -14,8 +12,8 @@ abstract class BaseViewAnimator<T: ViewAnimator, V: View> {
         fun done()
     }
 
-    protected abstract fun getView() : V
-    protected abstract fun getViewAnimator() : T
+    abstract fun getView() : V
+    abstract fun getViewAnimator() : T
 
     private var next: ((T) -> Unit)? = null
 
