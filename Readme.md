@@ -1,3 +1,4 @@
+[![](https://jitpack.io/v/wwdablu/ViewAnimator.svg)](https://jitpack.io/#wwdablu/ViewAnimator)  
 # ViewAnimator
 
 ViewAnimator is an Android library that has been developed with the aim to perform basic animation quickly without the need for any major coding. All the boiler plate code will be removed when using this library and the developer can concentrate on only the functionality.
@@ -28,6 +29,19 @@ produces the following result:
 
 
 ## Usage  
+Put the following on the gradle:  
+```
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+    
+dependencies {
+    implementation 'com.github.wwdablu:ViewAnimator:1.0.0'
+}
+```
 Currently the library supports two (2) ViewAnimators:  
 - [x] TextViewAnimator
 - [x] ImageViewAnimator  
