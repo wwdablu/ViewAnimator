@@ -16,3 +16,8 @@ enum class Direction {
     Right,
     Bottom
 }
+
+enum class Rotate {
+    Clockwise,
+    CounterClockwise
+}

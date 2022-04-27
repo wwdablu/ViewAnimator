@@ -66,17 +66,13 @@ class TextViewAnimator constructor(private val textView: TextView) : BaseViewAni
         var arrayIndex = 0
 
         loop({ _, callback ->
-            typewrite(strings[arrayIndex], typeGap).then {
-                waitAndThen(wait) {
-                    removeText(removeGap).then {
-                        waitAndThen(wait) {
-                            arrayIndex++
-                            callback.done()
-                        }
-                    }
+            typewrite(strings[arrayIndex], typeGap).then(wait) {
+                removeText(removeGap).then(wait) {
+                    arrayIndex++
+                    callback.done()
                 }
             }
-        }, condition = fun() : Boolean {
+        }, fun() : Boolean {
             return arrayIndex < strings.size
         }, {
             //

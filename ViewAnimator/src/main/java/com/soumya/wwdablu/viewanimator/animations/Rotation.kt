@@ -3,14 +3,13 @@ package com.soumya.wwdablu.viewanimator.animations
 import android.animation.Animator
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
-import com.soumya.wwdablu.viewanimator.animators.Action
+import com.soumya.wwdablu.viewanimator.animators.Axis
+import com.soumya.wwdablu.viewanimator.animators.Rotate
 import com.soumya.wwdablu.viewanimator.animators.ViewAnimatorListener
 
-internal class Property internal constructor(private val view: View) : BaseAnimation() {
+internal class Rotation internal constructor(private val view: View) : BaseAnimation() {
 
-    fun fade(type: Action,
-             duration: Long = 500,
-             listener: ViewAnimatorListener? = null) {
+    fun by(degree: Float, rotation: Rotate, duration: Long = 500, listener: ViewAnimatorListener? = null) {
 
         view.animate().apply {
             this.duration = duration
@@ -33,19 +32,18 @@ internal class Property internal constructor(private val view: View) : BaseAnima
                 }
             })
 
-            alpha(if(type == Action.In) 1F else 0F)
+            rotationBy(if(rotation == Rotate.Clockwise) {
+                degree
+            } else {
+                -degree
+            })
         }
     }
 
-    fun scale(type: Action, duration: Long = 500, listener: ViewAnimatorListener? = null) {
-        scale(if(type == Action.In) 1F else 0F, duration, listener)
-    }
-
-    fun scale(to: Float, duration: Long = 500, listener: ViewAnimatorListener? = null) {
+    fun flip(axis: Axis, degree: Float, duration: Long = 500, listener: ViewAnimatorListener? = null) {
 
         view.animate().apply {
             this.duration = duration
-            interpolator = AccelerateDecelerateInterpolator()
             setListener(object : Animator.AnimatorListener {
                 override fun onAnimationStart(p0: Animator?) {
                     listener?.onAnimationStart()
@@ -64,8 +62,11 @@ internal class Property internal constructor(private val view: View) : BaseAnima
                 }
             })
 
-            scaleX(to)
-            scaleY(to)
+            if(axis == Axis.X) {
+                rotationXBy(degree)
+            } else {
+                rotationYBy(degree)
+            }
         }
     }
 }
